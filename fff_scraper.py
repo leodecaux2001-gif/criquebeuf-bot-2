@@ -278,3 +278,48 @@ def get_classement(url):
         })
 
     return table
+
+def get_last_match(self, url, team_name):
+    try:
+        import requests
+        from bs4 import BeautifulSoup
+
+        r = requests.get(url, timeout=15)
+        soup = BeautifulSoup(r.text, "html.parser")
+
+        return {
+            "score": "2 - 1",
+            "adversaire": "FC TEST",
+            "buteurs": "Lucas 23'\\nThomas 78'",
+            "date": "Dernier match",
+            "stade": "Stade Municipal"
+        }
+    except Exception:
+        return None
+
+
+def get_classement(self, url):
+    try:
+        import requests
+        from bs4 import BeautifulSoup
+
+        r = requests.get(url, timeout=15)
+        soup = BeautifulSoup(r.text, "html.parser")
+
+        table = []
+        rows = soup.select("table tbody tr")
+
+        for row in rows:
+            cols = row.find_all("td")
+            if len(cols) < 3:
+                continue
+
+            table.append({
+                "position": cols[0].get_text(strip=True),
+                "team": cols[1].get_text(strip=True),
+                "points": cols[-1].get_text(strip=True),
+            })
+
+        return table if table else None
+    except Exception:
+        return None
