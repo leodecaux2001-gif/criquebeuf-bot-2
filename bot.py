@@ -273,7 +273,7 @@ VICTOIRE ✅ DEFAITE ❌
     await message.add_reaction("❌")
 
 @bot.command(name="derniermatch")
-async def derniermatch(ctx: commands.Context):
+async def derniermatch(ctx):
 
     match = scraper.get_last_match(MATCH_URL, TEAM_NAME)
 
@@ -281,27 +281,15 @@ async def derniermatch(ctx: commands.Context):
         await ctx.send("Impossible de trouver le dernier match.")
         return
 
-    embed = discord.Embed(
-        title="⚽ DERNIER MATCH :criquebeuf:",
-        color=0xe74c3c
+    message = (
+        f"⚽ DERNIER MATCH :criquebeuf:\n\n"
+        f"{TEAM_NAME} {match['score']} {match['adversaire']}\n\n"
+        f"⚽ Buteurs:\n{match['buteurs']}\n\n"
+        f"📅 {match['date']}\n"
+        f"📍 {match['stade']}"
     )
 
-    embed.add_field(
-        name="Match",
-        value=f"{TEAM_NAME} {match['score']} {match['adversaire']}",
-        inline=False
-    )
-
-    embed.add_field(
-        name="⚽ Buteurs",
-        value=match["buteurs"],
-        inline=False
-    )
-
-    embed.add_field(name="📅 Date", value=match["date"])
-    embed.add_field(name="📍 Stade", value=match["stade"])
-
-    await ctx.send(embed=embed)
+    await ctx.send(message)
 
 
 if __name__ == "__main__":
