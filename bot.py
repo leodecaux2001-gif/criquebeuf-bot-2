@@ -241,6 +241,37 @@ async def forcercheck_error(ctx: commands.Context, error: Exception) -> None:
     else:
         await ctx.send("Impossible d'exécuter la commande.")
 
+@bot.command(name="testmatch")
+async def testmatch(ctx: commands.Context) -> None:
+
+    embed = discord.Embed(
+        title="⚽ PROCHAIN MATCH :criquebeuf:",
+        color=0x2ecc71
+    )
+
+    embed.add_field(
+        name="Match",
+        value="AS CRIQUEBEUF FB 🆚 FC TEST",
+        inline=False
+    )
+
+    embed.add_field(name="📅 Date", value="Dimanche 22 Mars")
+    embed.add_field(name="⏲️ Heure", value="14H30")
+    embed.add_field(name="📍 Stade", value="Stade Municipal")
+    embed.add_field(name="🏠 Adresse", value="Criquebeuf-sur-Seine", inline=False)
+
+    embed.description = """
+Venez supporter l'équipe ! 🔥
+Vos pronostics ? 😈
+
+VICTOIRE ✅ DEFAITE ❌
+"""
+
+    message = await ctx.send("@everyone", embed=embed)
+
+    await message.add_reaction("✅")
+    await message.add_reaction("❌")
+
 
 if __name__ == "__main__":
     bot.run(TOKEN)
