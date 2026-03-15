@@ -18,7 +18,9 @@ CONFIG_PATH = BASE_DIR / "config.json"
 with CONFIG_PATH.open("r", encoding="utf-8") as f:
     CONFIG = json.load(f)
 
-TOKEN = CONFIG["token"]
+import os
+
+TOKEN = os.getenv("TOKEN") or CONFIG["token"]
 CHANNEL_NAME = CONFIG["channel_name"]
 ANNOUNCE_EVERYONE = bool(CONFIG.get("announce_everyone", True))
 TEAM_NAME = CONFIG["team_name"]
