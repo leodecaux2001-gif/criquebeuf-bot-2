@@ -291,6 +291,22 @@ async def derniermatch(ctx):
 
     await ctx.send(message)
 
+@bot.command(name="classement")
+async def classement(ctx):
+
+    table = scraper.get_classement(MATCH_URL)
+
+    if table is None:
+        await ctx.send("Impossible de récupérer le classement.")
+        return
+
+    message = "🏆 CLASSEMENT DU CHAMPIONNAT\n\n"
+
+    for team in table[:10]:
+        message += f"{team['position']}. {team['team']} - {team['points']} pts\n"
+
+    await ctx.send(message)
+
 
 if __name__ == "__main__":
     bot.run(TOKEN)

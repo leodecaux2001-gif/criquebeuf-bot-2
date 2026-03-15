@@ -251,3 +251,30 @@ class FFFScraper:
             if match.match_id == match_id:
                 return match
         return None
+
+def get_classement(url):
+
+    import requests
+    from bs4 import BeautifulSoup
+
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, "html.parser")
+
+    table = []
+
+    rows = soup.select("table tbody tr")
+
+    for row in rows:
+
+        cols = row.find_all("td")
+
+        if len(cols) < 3:
+            continue
+
+        table.append({
+            "position": cols[0].text.strip(),
+            "team": cols[1].text.strip(),
+            "points": cols[-1].text.strip()
+        })
+
+    return table
