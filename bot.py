@@ -272,6 +272,37 @@ VICTOIRE ✅ DEFAITE ❌
     await message.add_reaction("✅")
     await message.add_reaction("❌")
 
+@bot.command(name="derniermatch")
+async def derniermatch(ctx: commands.Context):
+
+    match = scraper.get_last_match(MATCH_URL, TEAM_NAME)
+
+    if match is None:
+        await ctx.send("Impossible de trouver le dernier match.")
+        return
+
+    embed = discord.Embed(
+        title="⚽ DERNIER MATCH :criquebeuf:",
+        color=0xe74c3c
+    )
+
+    embed.add_field(
+        name="Match",
+        value=f"{TEAM_NAME} {match['score']} {match['adversaire']}",
+        inline=False
+    )
+
+    embed.add_field(
+        name="⚽ Buteurs",
+        value=match["buteurs"],
+        inline=False
+    )
+
+    embed.add_field(name="📅 Date", value=match["date"])
+    embed.add_field(name="📍 Stade", value=match["stade"])
+
+    await ctx.send(embed=embed)
+
 
 if __name__ == "__main__":
     bot.run(TOKEN)
