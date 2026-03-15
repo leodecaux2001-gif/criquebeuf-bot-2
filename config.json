@@ -1,0 +1,11 @@
+{
+  "token": "",
+  "channel_name": "⚽match",
+  "announce_everyone": true,
+  "team_name": "AS CRIQUEBEUF FB",
+  "emoji": ":criquebeuf:",
+  "timezone": "Europe/Paris",
+  "check_interval_minutes": 15,
+  "match_url": "https://epreuves.fff.fr/competition/club/590373-a-s-criquebeuf-football/equipe/2025_163381_SEM_1/resultat-calendrier",
+  "logo_url": "https://upload.wikimedia.org/wikipedia/fr/thumb/8/8f/FFF_logo.svg/512px-FFF_logo.svg.png"
+}
